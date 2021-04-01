@@ -1,14 +1,15 @@
 Summary:	E-book manager for GNOME
 Summary(pl.UTF-8):	Zarządca e-booków dla GNOME
 Name:		gnome-books
-Version:	3.34.0
-Release:	2
+Version:	40.0
+Release:	1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-books/3.34/%{name}-%{version}.tar.xz
-# Source0-md5:	4e2c55275875a613a37b05b738da1c23
+Source0:	https://download.gnome.org/sources/gnome-books/40/%{name}-%{version}.tar.xz
+# Source0-md5:	8a4e112280421373f3233101bf5cf28e
 URL:		https://wiki.gnome.org/Apps/Books
 BuildRequires:	evince-devel >= 3.14.0
+BuildRequires:	gdk-pixbuf2-devel >= 2.39.1
 BuildRequires:	gettext-tools >= 0.19.8
 BuildRequires:	gjs-devel >= 1.48.0
 BuildRequires:	glib2-devel >= 1:2.40.0
@@ -18,17 +19,18 @@ BuildRequires:	gtk+3-devel >= 3.22.15
 BuildRequires:	gtk-webkit4-devel >= 2.6.0
 BuildRequires:	libgepub-devel >= 0.6
 BuildRequires:	libxslt-progs
-BuildRequires:	meson >= 0.42.0
+BuildRequires:	meson >= 0.49.0
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig >= 1:0.22
 BuildRequires:	rpmbuild(macros) >= 1.736
 BuildRequires:	tar >= 1:1.22
-BuildRequires:	tracker-devel >= 2.0.0
+BuildRequires:	tracker3-devel >= 3.0
 BuildRequires:	xz
 BuildRequires:	yelp-tools
 Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	glib2 >= 1:2.40.0
 Requires:	evince >= 3.14.0
+Requires:	gdk-pixbuf2 >= 2.39.1
 Requires:	gjs >= 1.48.0
 Requires:	glib2 >= 1:2.40.0
 Requires:	gnome-desktop >= 3.2.0
@@ -37,7 +39,7 @@ Requires:	gtk+3 >= 3.22.15
 Requires:	gtk-webkit4 >= 2.6.0
 Requires:	hicolor-icon-theme
 Requires:	libgepub >= 0.6
-Requires:	tracker >= 2.0.0
+Requires:	tracker3 >= 3.0
 Suggests:	unoconv >= 0.5
 Conflicts:	gnome-documents < 3.32
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
