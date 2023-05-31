@@ -1,0 +1,18 @@
+--- gnome-books-40.0/data/meson.build.orig	2023-05-31 17:42:29.080153592 +0200
++++ gnome-books-40.0/data/meson.build	2023-05-31 17:44:14.389445082 +0200
+@@ -54,7 +54,6 @@ sources += gnome.compile_resources(
+ appdata = 'org.gnome.Books.appdata.xml'
+ 
+ appdata_file = i18n.merge_file(
+-  appdata,
+   input: appdata + '.in',
+   output: appdata,
+   po_dir: po_dir,
+@@ -74,7 +73,6 @@ if appstream_util.found()
+ desktop = 'org.gnome.Books.desktop'
+ 
+ desktop_file = i18n.merge_file(
+-  desktop,
+   type: 'desktop',
+   input: desktop + '.in',
+   output: desktop,

@@ -1,19 +1,22 @@
+# TODO: obsoletes gnome-documents?
 Summary:	E-book manager for GNOME
 Summary(pl.UTF-8):	Zarządca e-booków dla GNOME
 Name:		gnome-books
 Version:	40.0
-Release:	2
+Release:	3
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	https://download.gnome.org/sources/gnome-books/40/%{name}-%{version}.tar.xz
 # Source0-md5:	8a4e112280421373f3233101bf5cf28e
+Patch0:		%{name}-gnome-desktop.patch
+Patch1:		%{name}-meson.patch
 URL:		https://wiki.gnome.org/Apps/Books
 BuildRequires:	evince-devel >= 3.14.0
 BuildRequires:	gdk-pixbuf2-devel >= 2.39.1
 BuildRequires:	gettext-tools >= 0.19.8
 BuildRequires:	gjs-devel >= 1.48.0
 BuildRequires:	glib2-devel >= 1:2.40.0
-BuildRequires:	gnome-desktop-devel >= 3.2.0
+BuildRequires:	gnome-desktop-devel >= 43
 BuildRequires:	gobject-introspection-devel >= 1.32.0
 BuildRequires:	gtk+3-devel >= 3.22.15
 BuildRequires:	gtk-webkit4-devel >= 2.6.0
@@ -33,7 +36,7 @@ Requires:	evince >= 3.14.0
 Requires:	gdk-pixbuf2 >= 2.39.1
 Requires:	gjs >= 1.48.0
 Requires:	glib2 >= 1:2.40.0
-Requires:	gnome-desktop >= 3.2.0
+Requires:	gnome-desktop >= 43
 Requires:	gobject-introspection >= 1.32.0
 Requires:	gtk+3 >= 3.22.15
 Requires:	gtk-webkit4 >= 2.6.0
@@ -52,6 +55,12 @@ Books to aplikacja dla GNOME służąca do zarządzania e-bookami.
 
 %prep
 %setup -q
+%patch0 -p1
+%patch1 -p1
+
+# workaround "data/meson.build:6:0: ERROR: Sandbox violation: Tried to grab file gd-main-view.h from a nested subproject."
+cp -p subprojects/libgd/libgd/gd-main-view{,-generic}.h data
+%{__sed} -i -e "s!join_paths(libgd_src_path, \('[^']*'\))!\1!" data/meson.build
 
 %build
 %meson build
